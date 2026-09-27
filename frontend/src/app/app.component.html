@@ -1,0 +1,52 @@
+<header class="header">
+  <div>
+    <h1>Carzy</h1>
+    <p>Simple & reliable car rentals</p>
+  </div>
+</header>
+
+<main class="container">
+  <section>
+    <h2>Available Cars</h2>
+
+    <div class="grid">
+      <article class="card" *ngFor="let car of cars">
+        <div class="car-icon">🚗</div>
+        <h3>{{ car.brand }} {{ car.model }}</h3>
+        <p>{{ car.year }} · {{ car.fuelType }} · {{ car.transmission }}</p>
+        <strong>₹{{ car.pricePerDay }} / day</strong>
+        <button (click)="selectCar(car)">Book Now</button>
+      </article>
+    </div>
+  </section>
+
+  <section class="booking" *ngIf="selectedCar">
+    <h2>Book {{ selectedCar.brand }} {{ selectedCar.model }}</h2>
+
+    <form [formGroup]="bookingForm" (ngSubmit)="bookCar()">
+      <label>
+        Name
+        <input type="text" formControlName="customerName" placeholder="Your name">
+      </label>
+
+      <label>
+        Email
+        <input type="email" formControlName="customerEmail" placeholder="you@example.com">
+      </label>
+
+      <label>
+        Start Date
+        <input type="date" formControlName="startDate">
+      </label>
+
+      <label>
+        End Date
+        <input type="date" formControlName="endDate">
+      </label>
+
+      <button type="submit">Confirm Booking</button>
+    </form>
+  </section>
+
+  <p class="message" *ngIf="message">{{ message }}</p>
+</main>
